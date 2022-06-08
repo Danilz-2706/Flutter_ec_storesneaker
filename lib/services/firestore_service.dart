@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ec_storesneaker/models/product.dart';
+import 'package:ec_storesneaker/models/user_data.dart';
 
 class FirestoreService {
   FirestoreService({required this.uid});
@@ -7,16 +8,10 @@ class FirestoreService {
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+  ///----------------------------------PRODUCT----------------------------------///
   Future<void> addProduct(Product product) async {
     final docId = firestore.collection("products").doc().id;
     await firestore.collection("products").doc(docId).set(product.toMap(docId));
-    // await firestore
-    //     .collection("products")
-    //     .add(product.toMap())
-    //     // ignore: avoid_print
-    //     .then((value) => print(value))
-    //     // ignore: avoid_print
-    //     .catchError((onError) => print("Error"));
   }
 
   Stream<List<Product>> getProducts() {
@@ -30,7 +25,17 @@ class FirestoreService {
             }).toList()); // build a list out of the products mapping
   }
 
+  ///----------------------------------USER----------------------------------///
   Future<void> deleteProduct(String id) async {
     return await firestore.collection("products").doc(id).delete();
+  }
+
+  Future<void> addUser(UserData user) async {
+    await firestore.collection("users").doc(user.uid).set(user.toMap());
+  }
+
+  Future<UserData?> getUser(String uid) async {
+    final doc = await firestore.collection("users").doc(uid).get();
+    return doc.exists ? UserData.fromMap(doc.data()!) : null;
   }
 }

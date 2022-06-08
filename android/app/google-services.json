@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "621575008817",
+    "project_id": "ec-storesneaker",
+    "storage_bucket": "ec-storesneaker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:621575008817:android:285d861b7db58ee631db10",
+        "android_client_info": {
+          "package_name": "com.example.ec_storesneaker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "621575008817-427f1bqjdag664c5acndmk6rr8p3s9nn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUur-cNatXn2awBDuDfiuaJwAJ3vvbYjc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "621575008817-427f1bqjdag664c5acndmk6rr8p3s9nn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

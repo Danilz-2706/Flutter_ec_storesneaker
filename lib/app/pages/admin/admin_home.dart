@@ -1,8 +1,11 @@
 import 'package:ec_storesneaker/app/pages/admin/admin_add_product.dart';
 import 'package:ec_storesneaker/app/providers.dart';
 import 'package:ec_storesneaker/models/product.dart';
+import 'package:ec_storesneaker/utils/snackbars.dart';
+import 'package:ec_storesneaker/widgets/project_list_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lottie/lottie.dart';
 
 class AdminHome extends ConsumerWidget {
   const AdminHome({Key? key}) : super(key: key);
@@ -28,22 +31,40 @@ class AdminHome extends ConsumerWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.active &&
               snapshot.data != null) {
+            if (snapshot.data!.isEmpty) {
+              return Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text("No products yet..."),
+                    Lottie.asset("assets/anim/empty.json", // here
+                        width: 200,
+                        repeat: false),
+                  ],
+                ),
+              );
+            }
             return ListView.builder(
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
                   final product = snapshot.data![index];
-                  return ListTile(
-                    title: Text(product.name),
-                    subtitle: Text("Price: ${product.price}"),
-                    leading: product.imageUrl != ""
-                        ? Image.network(product.imageUrl, height: 300)
-                        : Container(),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.delete),
-                      onPressed: () => ref
-                          .read(databaseProvider)!
-                          .deleteProduct(product.id!),
-                    ),
+                  return Padding(
+                    padding: const EdgeInsets.all(8.5),
+                    child: ProductListTile(
+                        product: product,
+                        onDelete: () async {
+                          openIconSnackBar(
+                            context,
+                            "Deleting item...",
+                            const Icon(
+                              Icons.delete,
+                              color: Colors.white,
+                            ),
+                          );
+                          await ref
+                              .read(databaseProvider)!
+                              .deleteProduct(product.id!);
+                        }),
                   );
                 });
           }

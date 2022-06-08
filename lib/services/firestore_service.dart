@@ -8,13 +8,15 @@ class FirestoreService {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   Future<void> addProduct(Product product) async {
-    await firestore
-        .collection("products")
-        .add(product.toMap())
-        // ignore: avoid_print
-        .then((value) => print(value))
-        // ignore: avoid_print
-        .catchError((onError) => print("Error"));
+    final docId = firestore.collection("products").doc().id;
+    await firestore.collection("products").doc(docId).set(product.toMap(docId));
+    // await firestore
+    //     .collection("products")
+    //     .add(product.toMap())
+    //     // ignore: avoid_print
+    //     .then((value) => print(value))
+    //     // ignore: avoid_print
+    //     .catchError((onError) => print("Error"));
   }
 
   Stream<List<Product>> getProducts() {
@@ -26,5 +28,9 @@ class FirestoreService {
               final d = doc.data(); // for each doc get the data
               return Product.fromMap(d); // convert into a map
             }).toList()); // build a list out of the products mapping
+  }
+
+  Future<void> deleteProduct(String id) async {
+    return await firestore.collection("products").doc(id).delete();
   }
 }

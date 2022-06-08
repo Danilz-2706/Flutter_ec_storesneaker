@@ -1,4 +1,5 @@
 import 'package:ec_storesneaker/services/firestore_service.dart';
+import 'package:ec_storesneaker/services/payment_service.dart';
 import 'package:ec_storesneaker/services/storage_service.dart';
 import 'package:ec_storesneaker/view_models/bag_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -38,4 +39,8 @@ final storageProvider = Provider<StorageService?>((ref) {
 
 final bagProvider = ChangeNotifierProvider<BagViewModel>((ref) {
   return BagViewModel();
+});
+
+final paymentProvider = Provider<PaymentService>((ref) {
+  return PaymentService();
 });

@@ -1,4 +1,5 @@
 import 'package:ec_storesneaker/app/pages/user/user_bag.dart';
+import 'package:ec_storesneaker/app/pages/user/user_orders.dart';
 import 'package:flutter/material.dart';
 
 class UserTopBar extends StatelessWidget {
@@ -16,8 +17,8 @@ class UserTopBar extends StatelessWidget {
         IconButton(
           icon: const Icon(Icons.menu),
           onPressed: () {
-            // Navigator.push(context,
-            //     MaterialPageRoute(builder: (context) => const UserOrders()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const UserOrders()));
           },
         ),
         IconButton(

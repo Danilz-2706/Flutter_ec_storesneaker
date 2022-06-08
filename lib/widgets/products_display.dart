@@ -1,3 +1,5 @@
+import 'package:ec_storesneaker/app/extensions/string_ext.dart';
+import 'package:ec_storesneaker/app/pages/product/product_detail.dart';
 import 'package:ec_storesneaker/app/providers.dart';
 import 'package:ec_storesneaker/models/product.dart';
 import 'package:ec_storesneaker/widgets/empty.dart';
@@ -31,11 +33,11 @@ class ProductsDisplay extends ConsumerWidget {
                     final product = snapshot.data![index];
                     return GestureDetector(
                       onTap: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) =>
-                        //             ProductDetail(product: product)));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ProductDetail(product: product)));
                       },
                       child: Container(
                         padding: const EdgeInsets.all(10.0),
@@ -58,7 +60,7 @@ class ProductsDisplay extends ConsumerWidget {
                             ),
                             const SizedBox(height: 10),
                             Text(
-                              product.name,
+                              product.name.capitalize(),
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 16),
                             ),

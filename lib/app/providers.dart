@@ -1,5 +1,6 @@
 import 'package:ec_storesneaker/services/firestore_service.dart';
 import 'package:ec_storesneaker/services/storage_service.dart';
+import 'package:ec_storesneaker/view_models/bag_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -33,4 +34,8 @@ final storageProvider = Provider<StorageService?>((ref) {
     return StorageService(uid: uid);
   }
   return null;
+});
+
+final bagProvider = ChangeNotifierProvider<BagViewModel>((ref) {
+  return BagViewModel();
 });
